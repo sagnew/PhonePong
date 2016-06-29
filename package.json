@@ -1,0 +1,19 @@
+{
+  "name": "phonepong",
+  "version": "1.0.0",
+  "description": "A basic game in which two Twilio phone numbers control the paddles in pong. Built with JavaScript for the purpose of teaching HTML5 Canvas development.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sagnew/PhonePong.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sagnew/PhonePong/issues"
+  },
+  "homepage": "https://github.com/sagnew/PhonePong#readme"
+}
