@@ -3,8 +3,8 @@ const express = require('express');
 const twilio = require('twilio');
 const bodyParser = require('body-parser');
 
-const playerOne = '';
-const playerTwo = '';
+const PLAYER_ONE = '+19179354934';
+const PLAYER_TWO = '+16314003346';
 
 const app = express();
 
@@ -25,9 +25,10 @@ app.get('/', (req, res) => {
 
 app.post('/handle-input', (req, res) => {
   const digitPressed = req.body.Digits;
-  const player = req.body.From === PLAYER_ONE ? 1
-               : req.body.From === PLAYER_TWO ? 2
+  const player = req.body.To === PLAYER_ONE ? 1
+               : req.body.To === PLAYER_TWO ? 2
                : null;
+  console.log(req.body.To);
 
   let twiml = new twilio.TwimlResponse();
 
@@ -37,7 +38,7 @@ app.post('/handle-input', (req, res) => {
 
   twiml.gather({
     numDigits: '1',
-    action: '/handle-key',
+    action: '/handle-input',
     method: 'POST',
     timeout: '1000'
   });
