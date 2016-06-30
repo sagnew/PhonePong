@@ -1,6 +1,4 @@
-const FPS = 60;
-const PADDLE_SPEED = 100;
-const BALL_SPEED = 200;
+const BALL_SPEED = 3;
 
 const canvas = document.getElementById('screen');
 
@@ -25,7 +23,7 @@ class Element {
 
   draw() {
     ctx.fillRect(this.x, this.y, this.width, this.height);
-  };
+  }
 
   move() {
     for (let i=0; i < elements.length; i++) {
@@ -78,7 +76,7 @@ let elements = [];
 // instantiate moving game elements
 let paddle1 = new Element(5, canvas.height/2, 20, 200);
 let paddle2 = new Element(canvas.width - 55, canvas.height/2, 20, 200);
-let ball = new Element(canvas.width/2, canvas.height/2, 30, 30, -1 * BALL_SPEED / FPS, 0.6 * BALL_SPEED / FPS);
+let ball = new Element(canvas.width/2, canvas.height/2, 30, 30, -1 * BALL_SPEED, 0.6 * BALL_SPEED);
 
 // create top and bottom walls
 let topWall = new Element( 0, 0, canvas.width, 1);
@@ -100,6 +98,8 @@ let gameLoop = function() {
     ball.x = canvas.width/2;
     ball.y = canvas.height/2;
   }
+
+  window.requestAnimationFrame(gameLoop);
 };
 
 socket.on('input', (input) => {
@@ -123,4 +123,4 @@ socket.on('input', (input) => {
 
 });
 
-setInterval(gameLoop, 1000 / FPS);
+window.requestAnimationFrame(gameLoop);
