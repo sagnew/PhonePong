@@ -1,10 +1,5 @@
-const BALL_SPEED = 3;
-
 const canvas = document.getElementById('screen');
 const ctx = canvas.getContext('2d');
-
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
 
 let elements = [];
 
@@ -25,8 +20,7 @@ class Element {
   }
 
   move() {
-    elements.forEach((element) => {
-      // Bounce on horizontal collision
+    elements.forEach(element => {
       if ((this.top() < element.bottom() && this.bottom() > element.top()) &&
           (this.right() < element.left() && this.right() + this.vx >= element.left() ||
            this.left() > element.right() && this.left() + this.vx <= element.right())) {
@@ -34,7 +28,6 @@ class Element {
         return;
       }
 
-      // Bounce on vertical collision
       if ((this.left() < element.right() && this.right() > element.left()) &&
           (this.bottom() < element.top() && this.bottom() + this.vy >= element.top() ||
            this.top() > element.bottom() && this.top() + this.vy <= element.bottom())) {
@@ -65,20 +58,19 @@ class Element {
 }
 
 let paddle1 = new Element(5, canvas.height/2, 20, 200);
-let paddle2 = new Element(canvas.width - 55, canvas.height/2, 20, 200);
-let ball = new Element(canvas.width/2, canvas.height/2, 30, 30, BALL_SPEED, 0.6 * BALL_SPEED);
-
+let paddle2 = new Element(canvas.width - 25, canvas.height/2, 20, 200);
+let ball = new Element(canvas.width/2, canvas.height/2, 30, 30, 3, 2);
 let topWall = new Element(0, 0, canvas.width, 1);
-let bottom = new Element(0, canvas.height - 1, canvas.width, 1);
+let bottomWall = new Element(0, canvas.height - 1, canvas.width, 1);
 
 let gameLoop = () => {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  elements.forEach((element) => {
+  elements.forEach(element => {
     element.move();
     element.draw();
   });
 
-  if (ball.right() > canvas.width || ball.left() < 0) {
+  if (ball.right() < 0 || ball.left() > canvas.width) {
     ball.x = canvas.width/2;
     ball.y = canvas.height/2;
   }

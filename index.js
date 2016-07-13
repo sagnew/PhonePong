@@ -28,7 +28,6 @@ app.post('/handle-input', (req, res) => {
   const player = req.body.To === PLAYER_ONE ? 1
                : req.body.To === PLAYER_TWO ? 2
                : null;
-  console.log(req.body.To);
 
   let twiml = new twilio.TwimlResponse();
 
